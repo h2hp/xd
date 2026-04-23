@@ -185,6 +185,7 @@
             box-shadow: 0 12px 22px -12px rgba(0,0,0,0.15);
             cursor: pointer;
             border: 1px solid #ffe1bc;
+            position: relative;
         }
         .recipe-card:hover {
             transform: translateY(-6px);
@@ -198,6 +199,9 @@
         }
         .card-content {
             padding: 1.4rem 1.3rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 212px;
         }
         .card-content h3 {
             font-size: 1.6rem;
@@ -219,6 +223,8 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: #aa5518;
+            position: absolute;
+            bottom: 20px;
         }
 
         /* кнопка книга нига рецептов большая */
