@@ -3,18 +3,24 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2');
 
-const PORT = 3000;
 
-// 🔥 ВСТАВЬ СВОЙ ПАРОЛЬ НИЖЕ
+const PORT = process.env.PORT || 3000;
+
+const dbHost = process.env.DB_HOST || '72.56.243.247';
+const dbPort = process.env.DB_PORT || 3306;       
+const dbUser = process.env.DB_USER || 'gen_user';
+const dbPassword = process.env.DB_PASSWORD || 'Klokovanklokovan_0711';
+const dbName = process.env.DB_NAME || 'default_db';
+
 const connection = mysql.createConnection({
-  host: '72.56.243.247',
-  port: 3306,
-  user: 'gen_user',
-  password: 'Klokovanklokovan_0711',
-  database: 'default_db',
+  host: dbHost,
+  port: dbPort,
+  user: dbUser,
+  password: dbPassword,
+  database: dbName,
   ssl: {
-  rejectUnauthorized: false
-}
+    rejectUnauthorized: false 
+  }
 });
 
 connection.connect((err) => {
@@ -26,11 +32,9 @@ connection.connect((err) => {
 });
 
 const server = http.createServer((req, res) => {
-
   // Главная страница
   if (req.url === '/') {
     const filePath = path.join(__dirname, 'index.html');
-
     fs.readFile(filePath, (err, data) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -46,6 +50,7 @@ const server = http.createServer((req, res) => {
   else if (req.url === '/recipes') {
     connection.query('SELECT * FROM recipes', (err, results) => {
       if (err) {
+        console.error('Ошибка запроса /recipes:', err);
         res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
         res.end(JSON.stringify({ error: 'Ошибка базы данных' }));
       } else {
@@ -59,7 +64,6 @@ const server = http.createServer((req, res) => {
   else if (req.url.startsWith('/images/')) {
     const filePath = path.join(__dirname, req.url);
     const ext = path.extname(filePath).toLowerCase();
-
     let contentType = 'application/octet-stream';
     if (ext === '.jpg' || ext === '.jpeg') contentType = 'image/jpeg';
     if (ext === '.png') contentType = 'image/png';
@@ -85,5 +89,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Сервер запущен: http://localhost:${PORT}`);
+  console.log(`Сервер запущен на порту ${PORT}`);
 });

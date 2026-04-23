@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Пловно - и точка! | Главная страница</title>
+    <title>Пловно - и точка! | Рецепты с картинками и пошаговыми инструкциями</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,6 @@
             line-height: 1.4;
         }
 
-        /* хедер) */
         .header {
             background-color: #c97e2c;
             background-image: linear-gradient(135deg, #b45f1b, #e6953c);
@@ -45,7 +44,6 @@
             font-weight: 800;
             color: #ffefcf;
             text-shadow: 3px 3px 0 #854d1a;
-            transition: 0.2s;
         }
         .logo span {
             font-size: 1.2rem;
@@ -53,7 +51,6 @@
             color: #fff0c4;
         }
 
-        /* поиск + кнопки действий */
         .action-group {
             display: flex;
             flex-wrap: wrap;
@@ -120,7 +117,6 @@
         .btn-primary:hover {
             background: #ffe0a3;
             transform: scale(1.02);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .btn-outline {
             background: rgba(255,245,225,0.95);
@@ -131,7 +127,6 @@
             transform: translateY(-2px);
         }
 
-        /* Главный контент */
         .container {
             max-width: 1300px;
             margin: 2rem auto;
@@ -145,7 +140,6 @@
             border-radius: 70px;
             padding: 2rem 2rem;
             backdrop-filter: blur(2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         .hero h2 {
             font-size: 2.5rem;
@@ -160,7 +154,6 @@
             margin: 0 auto;
         }
 
-        /* карточки рецептоу */
         .section-title {
             font-size: 2rem;
             margin: 2.5rem 0 1.5rem 0;
@@ -172,7 +165,7 @@
 
         .recipe-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 2rem;
             margin-bottom: 2.5rem;
         }
@@ -183,25 +176,24 @@
             overflow: hidden;
             transition: all 0.25s ease;
             box-shadow: 0 12px 22px -12px rgba(0,0,0,0.15);
-            cursor: pointer;
             border: 1px solid #ffe1bc;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
         .recipe-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 22px 28px -12px rgba(0,0,0,0.2);
         }
         .card-img {
-            height: 190px;
+            height: 180px;
             background-size: cover;
             background-position: center;
+            background-color: #e9cfaa;
             position: relative;
         }
         .card-content {
-            padding: 1.4rem 1.3rem 1.6rem;
-            display: flex;
-            flex-direction: column;
-            min-height: 212px;
+            padding: 1.2rem 1.3rem 1.6rem;
+            flex: 1;
         }
         .card-content h3 {
             font-size: 1.6rem;
@@ -209,25 +201,53 @@
             color: #c4631e;
             margin-bottom: 0.5rem;
         }
-        .card-content p {
+        .card-content .description {
             color: #5f4330;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             font-size: 0.95rem;
             line-height: 1.4;
+        }
+        .ingredients {
+            background: #fff6ea;
+            padding: 0.7rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 0.8rem 0;
+        }
+        .ingredients strong {
+            color: #a5521a;
+        }
+        .steps {
+            margin-top: 0.8rem;
+            background: #fcf3e8;
+            border-radius: 20px;
+            padding: 0.8rem;
+        }
+        .steps-title {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            color: #b45f2b;
+        }
+        .steps-list {
+            padding-left: 1.2rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .steps-list li {
+            margin-bottom: 0.3rem;
         }
         .badge {
             background: #ffdbb5;
             display: inline-block;
             padding: 0.25rem 0.9rem;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: #aa5518;
-            position: absolute;
-            bottom: 20px;
+            margin-top: 0.5rem;
         }
 
-        /* кнопка книга нига рецептов большая */
         .book-section {
             text-align: center;
             margin: 3rem 0 2rem;
@@ -251,10 +271,20 @@
         .book-btn:hover {
             background: #f3aa4b;
             transform: scale(1.02);
-            box-shadow: 0 18px 28px -10px #cb6e2e;
         }
 
-        /* логин/рег, поиск, книга */
+        footer {
+            background: #dba359;
+            color: #2c1a0e;
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 3rem;
+            font-weight: 500;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        /* модалки */
         .modal {
             display: none;
             position: fixed;
@@ -270,78 +300,54 @@
         }
         .modal-card {
             background: #fff7ef;
-            max-width: 420px;
+            max-width: 500px;
             width: 90%;
             border-radius: 48px;
             padding: 2rem 1.8rem;
             box-shadow: 0 30px 40px rgba(0,0,0,0.3);
-            text-align: center;
+            text-align: left;
             animation: fadeUp 0.2s ease;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
         }
         .modal-card h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #bc601f;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
         .modal-card input {
             width: 100%;
-            padding: 0.9rem;
+            padding: 0.7rem;
             margin: 0.5rem 0;
             border: 1px solid #e9cfb0;
             border-radius: 60px;
-            font-size: 1rem;
-            background: white;
-            outline: none;
         }
         .modal-card button {
             background: #e68a2e;
             border: none;
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem;
             border-radius: 60px;
             font-weight: bold;
             color: white;
-            font-size: 1rem;
-            margin-top: 1rem;
             width: 100%;
             cursor: pointer;
         }
-        .modal-card .close-modal {
-            background: #d9c2a8;
-            color: #4f2b12;
+        .close-modal {
+            background: #d9c2a8 !important;
+            color: #4f2b12 !important;
             margin-top: 0.6rem;
         }
-        .search-results-modal .recipe-result {
+        .recipe-result {
             background: #f1e5d6;
             border-radius: 28px;
             padding: 0.7rem;
             margin-top: 0.8rem;
-            text-align: left;
             cursor: pointer;
-        }
-        .search-results-modal .recipe-result p {
-            font-weight: bold;
-            color: #7b3f12;
-        }
-
-        footer {
-            background: #dba359;
-            color: #2c1a0a;
-            text-align: center;
-            padding: 1.8rem;
-            margin-top: 3rem;
-            font-weight: 500;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
         }
 
         @media (max-width: 780px) {
@@ -375,7 +381,7 @@
         </div>
         <div class="action-group">
             <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Поиск рецептов... (узбекский, казань)">
+                <input type="text" id="searchInput" placeholder="Поиск рецептов...">
                 <button class="search-btn" id="openSearchBtn">🔍 Найти</button>
             </div>
             <div class="btn-group">
@@ -392,15 +398,12 @@
         <p>Традиционные рецепты, секреты зирвака, правильный рис и золотистый зирвак. Выбери свой идеальный плов!</p>
     </div>
 
-    <!-- кнопка книга нига -->
     <div class="book-section">
         <button class="book-btn" id="bookRecipesBtn">📖 Книга рецептов 🧆</button>
     </div>
 
     <div class="section-title">⭐ Популярные рецепты плова</div>
-    <div class="recipe-grid" id="recipeGrid">
-        <!-- Java -->
-    </div>
+    <div class="recipe-grid" id="recipeGrid"></div>
 </main>
 
 <footer>
@@ -412,103 +415,61 @@
     </div>
 </footer>
 
-<!-- вход -->
-<div id="loginModal" class="modal">
-    <div class="modal-card">
-        <h3>Вход 🍲</h3>
-        <input type="text" id="loginUsername" placeholder="Имя пользователя">
-        <input type="password" id="loginPassword" placeholder="Пароль">
-        <button id="submitLogin">Войти</button>
-        <button class="close-modal" onclick="closeModal('loginModal')">Закрыть</button>
-    </div>
-</div>
-
-<!-- рега -->
-<div id="registerModal" class="modal">
-    <div class="modal-card">
-        <h3>Регистрация 📝</h3>
-        <input type="text" id="regName" placeholder="Ваше имя">
-        <input type="email" id="regEmail" placeholder="Email">
-        <input type="password" id="regPass" placeholder="Пароль">
-        <button id="submitRegister">Зарегистрироваться</button>
-        <button class="close-modal" onclick="closeModal('registerModal')">Закрыть</button>
-    </div>
-</div>
-
-<!-- книга нига рецептов  -->
-<div id="searchResultsModal" class="modal">
-    <div class="modal-card" style="max-width: 500px; max-height: 70vh; overflow-y: auto;">
-        <h3 id="modalTitle">📚 Рецепты</h3>
-        <div id="modalRecipesList"></div>
-        <button class="close-modal" onclick="closeModal('searchResultsModal')">Закрыть</button>
-    </div>
-</div>
+<!-- Модалки -->
+<div id="loginModal" class="modal"><div class="modal-card"><h3>Вход 🍲</h3><input type="text" id="loginUsername" placeholder="Имя"><input type="password" id="loginPassword" placeholder="Пароль"><button id="submitLogin">Войти</button><button class="close-modal" onclick="closeModal('loginModal')">Закрыть</button></div></div>
+<div id="registerModal" class="modal"><div class="modal-card"><h3>Регистрация 📝</h3><input type="text" id="regName" placeholder="Имя"><input type="email" id="regEmail" placeholder="Email"><input type="password" id="regPass" placeholder="Пароль"><button id="submitRegister">Зарегистрироваться</button><button class="close-modal" onclick="closeModal('registerModal')">Закрыть</button></div></div>
+<div id="searchResultsModal" class="modal"><div class="modal-card" style="max-width:500px;"><h3 id="searchModalTitle">📚 Рецепты</h3><div id="modalRecipesList"></div><button class="close-modal" onclick="closeModal('searchResultsModal')">Закрыть</button></div></div>
 
 <script>
-    // рецептики мои
     const recipes = [
         {
             id: 1,
             name: "Классический узбекский плов",
             description: "Говядина/баранина, зирвак, золотистый рис, барбарис и зира.",
-            ingredients: "Рис девзира, баранина, морковь, лук, чеснок, зира, курдючный жир",
-
-            tags: ["узбекский", "классика", "баранина", "праздничный"]
+            ingredients: "Рис девзира, баранина (500г), морковь (500г), лук (200г), чеснок (1 головка), зира, барбарис, курдючный жир (100г).",
+            tags: ["узбекский", "классика", "баранина"],
+            img: "./images/uzbek.jpg",
+            steps: [
+                "1. Разогреть жир, обжарить лук до золота.",
+                "2. Добавить мясо крупными кусками, жарить до корочки.",
+                "3. Выложить морковь соломкой, жарить 5-7 мин.",
+                "4. Залить водой (500 мл), добавить зиру, барбарис, чеснок, соль. Варить 20 мин — зирвак.",
+                "5. Засыпать промытый рис, залить кипятком на 2 см выше риса.",
+                "6. Варить на сильном огне, пока вода не впитается. Накрыть, томить 20 мин."
+            ]
         },
         {
             id: 2,
             name: "Плов с курицей и черносливом",
             description: "Нежный плов с куриным филе, сладковатый оттенок чернослива.",
-            ingredients: "Курица, рис жасмин, чернослив, морковь, лук, куркума",
-            tags: ["курица", "сладкий", "быстрый", "диетический"]
+            ingredients: "Курица (500г), рис жасмин (400г), чернослив (100г), морковь (300г), лук (150г), куркума, зира.",
+            tags: ["курица", "сладкий", "быстрый"],
+            img: "./images/chicken.jpg",
+            steps: [
+                "1. Курицу обжарить с луком до золотистого.",
+                "2. Добавить морковь, пассеровать 5 мин.",
+                "3. Положить чернослив, специи, соль, залить водой (500 мл). Тушить 10 мин.",
+                "4. Засыпать рис, разровнять, залить кипятком на 1,5 см.",
+                "5. Варить, пока жидкость не впитается. Накрыть, дать настояться 15 мин."
+            ]
         },
         {
             id: 3,
             name: "Самаркандский плов",
             description: "Отдельно рис и зирвак, выкладывается слоями, рассыпчатый.",
-            ingredients: "Баранина, рис, нут, изюм, морковь, зира, барбарис",
-            tags: ["самарканд", "рассыпчатый", "праздничный", "нут"]
-        },
+            ingredients: "Баранина (600г), рис девзира (600г), морковь (600г), лук (300г), нут (100г), изюм (50г), зира, барбарис.",
+            tags: ["самарканд", "рассыпчатый", "праздничный"],
+            img: "./images/samara.jpg",
+            steps: [
+                "1. В казане разогреть масло, обжарить мясо до корочки, вынуть.",
+                "2. Обжарить лук, затем морковь соломкой.",
+                "3. Вернуть мясо, добавить зиру, барбарис, нут, залить 500 мл воды, посолить. Варить 15 мин.",
+                "4. Выложить замоченный рис (1-2 ч), разровнять.",
+                "5. Залить кипятком на 2 см выше риса. Томить, пока вода не впитается.",
+                "6. Собрать рис горкой, накрыть, упарить 15-20 мин."
+            ]
+        }
     ];
-
-    // отрисовка карточек первые 3 популярных
-// Функция возвращает путь к картинке в зависимости от id рецепта
-function getRecipeImagePath(recipeId) {
-    // Можно привязать к конкретным рецептам
-    switch(recipeId) {
-        case 1: return './images/uzbek.jpg';
-        case 2: return './images/chicken.jpg';
-        case 3: return './images/samara.jpg';
-        default: return './images/plov-default.jpg';
-    }
-}
-
-// Отрисовка карточек с картинками
-function renderMainRecipes() {
-    const grid = document.getElementById('recipeGrid');
-    if (!grid) return;
-    const mainRecipes = recipes.slice(0, 3);
-    grid.innerHTML = '';
-    mainRecipes.forEach(recipe => {
-        const card = document.createElement('div');
-        card.className = 'recipe-card';
-        const imageUrl = getRecipeImagePath(recipe.id);
-        // Вставляем фоном картинку. Если картинка не загрузится, будет цвет-запасной.
-        const imgStyle = `background-image: url('${imageUrl}'); background-size: cover; background-position: center; background-color: #f7cf9f;`;
-        card.innerHTML = `
-            <div class="card-img" style="${imgStyle}"></div>
-            <div class="card-content">
-                <h3>${escapeHtml(recipe.name)}</h3>
-                <p>${escapeHtml(recipe.description)}</p>
-                <span class="badge">🍲 ${recipe.tags[0] || "вкусно"}</span>
-            </div>
-        `;
-        card.addEventListener('click', () => {
-            showRecipeDetailsModal(recipe);
-        });
-        grid.appendChild(card);
-    });
-}
 
     function escapeHtml(str) {
         if (!str) return '';
@@ -517,156 +478,123 @@ function renderMainRecipes() {
             if (m === '<') return '&lt;';
             if (m === '>') return '&gt;';
             return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-            return c;
         });
     }
 
-    // детали рецепта при клике на карточку
-    function showRecipeDetailsModal(recipe) {
-        const modal = document.getElementById('searchResultsModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalList = document.getElementById('modalRecipesList');
-        modalTitle.innerText = `🍛 ${recipe.name}`;
-        modalList.innerHTML = `
-            <div style="background:#f7e6d6; border-radius: 28px; padding:1rem;">
-                <p><strong>📝 Описание:</strong> ${escapeHtml(recipe.description)}</p>
-                <p><strong>🥘 Ингредиенты:</strong> ${escapeHtml(recipe.ingredients)}</p>
-            </div>
-        `;
-        modal.style.display = 'flex';
+    function renderMainRecipes() {
+        const grid = document.getElementById('recipeGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        recipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            // Фон картинки или fallback цвет
+            const imgStyle = `background-image: url('${recipe.img}'); background-size: cover; background-position: center;`;
+            card.innerHTML = `
+                <div class="card-img" style="${imgStyle}"></div>
+                <div class="card-content">
+                    <h3>${escapeHtml(recipe.name)}</h3>
+                    <div class="description">${escapeHtml(recipe.description)}</div>
+                    <div class="ingredients"><strong>🥕 Ингредиенты:</strong> ${escapeHtml(recipe.ingredients)}</div>
+                    <div class="steps">
+                        <div class="steps-title">👨‍🍳 Способ приготовления (кратко):</div>
+                        <div class="steps-list">
+                            ${recipe.steps.map(step => `<li>${escapeHtml(step)}</li>`).join('')}
+                        </div>
+                    </div>
+                    <span class="badge">🍲 ${recipe.tags[0]}</span>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
     }
 
-    // открыть книга нигааа рецептов" 
     function openBookOfRecipes() {
         const modal = document.getElementById('searchResultsModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalList = document.getElementById('modalRecipesList');
-        modalTitle.innerText = '📖 Книга рецептов плова (все рецепты)';
-        modalList.innerHTML = '';
+        const title = document.getElementById('searchModalTitle');
+        const listDiv = document.getElementById('modalRecipesList');
+        title.innerText = '📖 Все рецепты плова';
+        listDiv.innerHTML = '';
         recipes.forEach(recipe => {
-            const recipeDiv = document.createElement('div');
-            recipeDiv.className = 'recipe-result';
-            recipeDiv.innerHTML = `<p><strong>🍚 ${escapeHtml(recipe.name)}</strong><br>${escapeHtml(recipe.description.substring(0, 80))}...</p>`;
-            recipeDiv.addEventListener('click', () => {
+            const div = document.createElement('div');
+            div.className = 'recipe-result';
+            div.innerHTML = `<p><strong>🍚 ${escapeHtml(recipe.name)}</strong><br>${escapeHtml(recipe.description)}</p>`;
+            div.addEventListener('click', () => {
                 closeModal('searchResultsModal');
-                showRecipeDetailsModal(recipe);
+                const cards = document.querySelectorAll('.recipe-card');
+                const idx = recipes.findIndex(r => r.id === recipe.id);
+                if (idx !== -1 && cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
-            modalList.appendChild(recipeDiv);
+            listDiv.appendChild(div);
         });
-        if(recipes.length === 0) modalList.innerHTML = '<p>Рецепты скоро появятся</p>';
         modal.style.display = 'flex';
     }
 
-    // поиск рецептов
     function performSearch() {
         const query = document.getElementById('searchInput').value.trim().toLowerCase();
-        if (query === "") {
-            alert("Введите название или ингредиент для поиска (например, баранина, курица)");
-            return;
-        }
-        const filtered = recipes.filter(recipe => 
-            recipe.name.toLowerCase().includes(query) || 
-            recipe.ingredients.toLowerCase().includes(query) ||
-            recipe.tags.some(tag => tag.toLowerCase().includes(query)) ||
-            recipe.description.toLowerCase().includes(query)
+        if (!query) { alert("Введите запрос"); return; }
+        const filtered = recipes.filter(r => 
+            r.name.toLowerCase().includes(query) ||
+            r.ingredients.toLowerCase().includes(query) ||
+            r.tags.some(t => t.toLowerCase().includes(query)) ||
+            r.description.toLowerCase().includes(query)
         );
         const modal = document.getElementById('searchResultsModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalList = document.getElementById('modalRecipesList');
-        modalTitle.innerText = `🔍 Результаты поиска: "${escapeHtml(query)}"`;
-        modalList.innerHTML = '';
-        if(filtered.length === 0) {
-            modalList.innerHTML = '<div style="padding:1rem; text-align:center;">😔 Рецептов не найдено. Попробуйте "плов с курицей" или "узбекский"</div>';
+        const title = document.getElementById('searchModalTitle');
+        const listDiv = document.getElementById('modalRecipesList');
+        title.innerText = `🔍 Результаты: "${escapeHtml(query)}"`;
+        listDiv.innerHTML = '';
+        if (filtered.length === 0) {
+            listDiv.innerHTML = '<div style="padding:1rem;text-align:center;">😔 Ничего не найдено</div>';
         } else {
-            filtered.forEach(recipe => {
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'recipe-result';
-                resultDiv.innerHTML = `<p><strong>🍛 ${escapeHtml(recipe.name)}</strong><br>${escapeHtml(recipe.description.slice(0, 70))}</p>`;
-                resultDiv.addEventListener('click', () => {
+            filtered.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'recipe-result';
+                div.innerHTML = `<p><strong>🍛 ${escapeHtml(r.name)}</strong><br>${escapeHtml(r.description)}</p>`;
+                div.addEventListener('click', () => {
                     closeModal('searchResultsModal');
-                    showRecipeDetailsModal(recipe);
+                    const cards = document.querySelectorAll('.recipe-card');
+                    const idx = recipes.findIndex(orig => orig.id === r.id);
+                    if (idx !== -1 && cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
-                modalList.appendChild(resultDiv);
+                listDiv.appendChild(div);
             });
         }
         modal.style.display = 'flex';
     }
 
-    // вход/рега модал
-    function openLoginModal() {
-        document.getElementById('loginModal').style.display = 'flex';
-    }
-    function openRegisterModal() {
-        document.getElementById('registerModal').style.display = 'flex';
-    }
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-
-    // если кто то зайдет или зарегает
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    function openRegisterModal() { document.getElementById('registerModal').style.display = 'flex'; }
     function demoLogin() {
-        const username = document.getElementById('loginUsername').value.trim();
-        if(username === "") {
-            alert("Введите имя пользователя");
-            return;
-        }
-        alert(`🍚 Добро пожаловать, ${username}! Вы вошли в мир настоящего плова.`);
+        const u = document.getElementById('loginUsername').value.trim();
+        if (!u) { alert("Введите имя"); return; }
+        alert(`🍚 Добро пожаловать, ${u}!`);
         closeModal('loginModal');
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('loginPassword').value = '';
     }
     function demoRegister() {
-        const name = document.getElementById('regName').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        if(name === "" || email === "") {
-            alert("Заполните имя и email для регистрации");
-            return;
-        }
-        alert(`✅ Регистрация успешна! ${name}, теперь вы можете сохранять любимые рецепты.`);
+        const n = document.getElementById('regName').value.trim();
+        const e = document.getElementById('regEmail').value.trim();
+        if (!n || !e) { alert("Заполните имя и email"); return; }
+        alert(`✅ Регистрация успешна! ${n}`);
         closeModal('registerModal');
-        document.getElementById('regName').value = '';
-        document.getElementById('regEmail').value = '';
-        document.getElementById('regPass').value = '';
     }
 
-    // события писле загрузки 
     document.addEventListener('DOMContentLoaded', () => {
         renderMainRecipes();
-
-        const bookBtn = document.getElementById('bookRecipesBtn');
-        if(bookBtn) bookBtn.addEventListener('click', openBookOfRecipes);
-
-        const searchBtn = document.getElementById('openSearchBtn');
-        if(searchBtn) searchBtn.addEventListener('click', performSearch);
-        
-        const searchInputField = document.getElementById('searchInput');
-        if(searchInputField) {
-            searchInputField.addEventListener('keypress', (e) => {
-                if(e.key === 'Enter') performSearch();
+        document.getElementById('bookRecipesBtn').addEventListener('click', openBookOfRecipes);
+        document.getElementById('openSearchBtn').addEventListener('click', performSearch);
+        document.getElementById('searchInput').addEventListener('keypress', e => { if(e.key === 'Enter') performSearch(); });
+        document.getElementById('loginModalBtn').addEventListener('click', openLoginModal);
+        document.getElementById('registerModalBtn').addEventListener('click', openRegisterModal);
+        document.getElementById('submitLogin').addEventListener('click', demoLogin);
+        document.getElementById('submitRegister').addEventListener('click', demoRegister);
+        window.onclick = (event) => {
+            ['loginModal','registerModal','searchResultsModal'].forEach(id => {
+                const el = document.getElementById(id);
+                if (event.target === el) el.style.display = 'none';
             });
-        }
-
-        const loginBtn = document.getElementById('loginModalBtn');
-        if(loginBtn) loginBtn.addEventListener('click', openLoginModal);
-        const registerBtn = document.getElementById('registerModalBtn');
-        if(registerBtn) registerBtn.addEventListener('click', openRegisterModal);
-
-        const submitLogin = document.getElementById('submitLogin');
-        if(submitLogin) submitLogin.addEventListener('click', demoLogin);
-        const submitReg = document.getElementById('submitRegister');
-        if(submitReg) submitReg.addEventListener('click', demoRegister);
-
-        // закрытие модалок
-        window.onclick = function(event) {
-            const modals = ['loginModal', 'registerModal', 'searchResultsModal'];
-            modals.forEach(id => {
-                const modalEl = document.getElementById(id);
-                if (event.target === modalEl) {
-                    modalEl.style.display = 'none';
-                }
-            });
-        }
+        };
     });
 </script>
 </body>
