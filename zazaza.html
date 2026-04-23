@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Пловно - и точка! | Главная страница</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Georgia', serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fff9ef 0%, #fef3e2 100%);
+            color: #2e241f;
+            line-height: 1.4;
+        }
+
+        /* хедер) */
+        .header {
+            background-color: #c97e2c;
+            background-image: linear-gradient(135deg, #b45f1b, #e6953c);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+            color: #ffefcf;
+            text-shadow: 3px 3px 0 #854d1a;
+            transition: 0.2s;
+        }
+        .logo span {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff0c4;
+        }
+
+        /* поиск + кнопки действий */
+        .action-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-wrapper {
+            display: flex;
+            background: white;
+            border-radius: 60px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .search-wrapper input {
+            border: none;
+            padding: 0.7rem 1.2rem;
+            width: 220px;
+            font-size: 1rem;
+            outline: none;
+            background: white;
+            color: #2e241f;
+        }
+        .search-wrapper input::placeholder {
+            color: #b4977a;
+            font-style: italic;
+        }
+        .search-btn {
+            background: #ffcd94;
+            border: none;
+            padding: 0 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.2s;
+            color: #5a2d0c;
+        }
+        .search-btn:hover {
+            background: #ffbc6e;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .btn {
+            border: none;
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #613913;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #ffecb3;
+            color: #a25213;
+            border: 1px solid #ffd58c;
+        }
+        .btn-primary:hover {
+            background: #ffe0a3;
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .btn-outline {
+            background: rgba(255,245,225,0.95);
+            border: 1px solid #f3bc7a;
+        }
+        .btn-outline:hover {
+            background: #fff1e0;
+            transform: translateY(-2px);
+        }
+
+        /* Главный контент */
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 235, 205, 0.6);
+            border-radius: 70px;
+            padding: 2rem 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #b65917;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #6f4a2c;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* карточки рецептоу */
+        .section-title {
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            border-left: 8px solid #e67e22;
+            padding-left: 1.2rem;
+            font-weight: 700;
+            color: #4b2c18;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 12px 22px -12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            border: 1px solid #ffe1bc;
+        }
+        .recipe-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 28px -12px rgba(0,0,0,0.2);
+        }
+        .card-img {
+            height: 190px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .card-content {
+            padding: 1.4rem 1.3rem 1.6rem;
+        }
+        .card-content h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #c4631e;
+            margin-bottom: 0.5rem;
+        }
+        .card-content p {
+            color: #5f4330;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .badge {
+            background: #ffdbb5;
+            display: inline-block;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #aa5518;
+        }
+
+        /* кнопка книга нига рецептов большая */
+        .book-section {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+        .book-btn {
+            background: #f7bc6c;
+            border: none;
+            padding: 1rem 2.8rem;
+            font-size: 1.7rem;
+            font-weight: 800;
+            border-radius: 60px;
+            color: #2c1a0e;
+            box-shadow: 0 12px 20px -8px rgba(160, 80, 20, 0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .book-btn:hover {
+            background: #f3aa4b;
+            transform: scale(1.02);
+            box-shadow: 0 18px 28px -10px #cb6e2e;
+        }
+
+        /* логин/рег, поиск, книга */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-card {
+            background: #fff7ef;
+            max-width: 420px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeUp 0.2s ease;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-card h3 {
+            font-size: 2rem;
+            color: #bc601f;
+            margin-bottom: 1.2rem;
+        }
+        .modal-card input {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.5rem 0;
+            border: 1px solid #e9cfb0;
+            border-radius: 60px;
+            font-size: 1rem;
+            background: white;
+            outline: none;
+        }
+        .modal-card button {
+            background: #e68a2e;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            margin-top: 1rem;
+            width: 100%;
+            cursor: pointer;
+        }
+        .modal-card .close-modal {
+            background: #d9c2a8;
+            color: #4f2b12;
+            margin-top: 0.6rem;
+        }
+        .search-results-modal .recipe-result {
+            background: #f1e5d6;
+            border-radius: 28px;
+            padding: 0.7rem;
+            margin-top: 0.8rem;
+            text-align: left;
+            cursor: pointer;
+        }
+        .search-results-modal .recipe-result p {
+            font-weight: bold;
+            color: #7b3f12;
+        }
+
+        footer {
+            background: #dba359;
+            color: #2c1a0a;
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 3rem;
+            font-weight: 500;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        @media (max-width: 780px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .action-group {
+                justify-content: center;
+            }
+            .search-wrapper input {
+                width: 160px;
+            }
+            .hero h2 {
+                font-size: 1.9rem;
+            }
+            .book-btn {
+                font-size: 1.3rem;
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>Пловно - и точка! <span>🍚🥕</span></h1>
+        </div>
+        <div class="action-group">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Поиск рецептов... (узбекский, казань)">
+                <button class="search-btn" id="openSearchBtn">🔍 Найти</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="loginModalBtn">Войти</button>
+                <button class="btn btn-outline" id="registerModalBtn">Регистрация</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="hero">
+        <h2>🍛 Аромат настоящего плова 🍛</h2>
+        <p>Традиционные рецепты, секреты зирвака, правильный рис и золотистый зирвак. Выбери свой идеальный плов!</p>
+    </div>
+
+    <!-- кнопка книга нига -->
+    <div class="book-section">
+        <button class="book-btn" id="bookRecipesBtn">📖 Книга рецептов 🧆</button>
+    </div>
+
+    <div class="section-title">⭐ Популярные рецепты плова</div>
+    <div class="recipe-grid" id="recipeGrid">
+        <!-- Java -->
+    </div>
+</main>
+
+<footer>
+    <p>🍚 Пловно — и точка! | Готовим с душой с 2025 🥩🥕</p>
+    <div style="margin: 12px 0 8px 0;">
+        <a href="tel:+79991234567" style="color: #2c1a0e; text-decoration: none; font-weight: 600; margin: 0 12px;">📞 +7 (968) 764-50-01</a>
+        <span style="color: #5a2d0c;">|</span>
+        <a href="mailto:plovno@example.com" style="color: #2c1a0e; text-decoration: none; font-weight: 600; margin: 0 12px;">✉️ rao170807@gmail.com</a>
+    </div>
+</footer>
+
+<!-- вход -->
+<div id="loginModal" class="modal">
+    <div class="modal-card">
+        <h3>Вход 🍲</h3>
+        <input type="text" id="loginUsername" placeholder="Имя пользователя">
+        <input type="password" id="loginPassword" placeholder="Пароль">
+        <button id="submitLogin">Войти</button>
+        <button class="close-modal" onclick="closeModal('loginModal')">Закрыть</button>
+    </div>
+</div>
+
+<!-- рега -->
+<div id="registerModal" class="modal">
+    <div class="modal-card">
+        <h3>Регистрация 📝</h3>
+        <input type="text" id="regName" placeholder="Ваше имя">
+        <input type="email" id="regEmail" placeholder="Email">
+        <input type="password" id="regPass" placeholder="Пароль">
+        <button id="submitRegister">Зарегистрироваться</button>
+        <button class="close-modal" onclick="closeModal('registerModal')">Закрыть</button>
+    </div>
+</div>
+
+<!-- книга нига рецептов  -->
+<div id="searchResultsModal" class="modal">
+    <div class="modal-card" style="max-width: 500px; max-height: 70vh; overflow-y: auto;">
+        <h3 id="modalTitle">📚 Рецепты</h3>
+        <div id="modalRecipesList"></div>
+        <button class="close-modal" onclick="closeModal('searchResultsModal')">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    // рецептики мои
+    const recipes = [
+        {
+            id: 1,
+            name: "Классический узбекский плов",
+            description: "Говядина/баранина, зирвак, золотистый рис, барбарис и зира.",
+            ingredients: "Рис девзира, баранина, морковь, лук, чеснок, зира, курдючный жир",
+            tags: ["узбекский", "узбекистан", "классика", "баранина", "праздничный", "азия"]
+        },
+        {
+            id: 2,
+            name: "Плов с курицей и черносливом",
+            description: "Нежный плов с куриным филе, сладковатый оттенок чернослива.",
+            ingredients: "Курица, рис жасмин, чернослив, морковь, лук, куркума",
+            tags: ["курица", "сладкий", "быстрый", "диетический", "азия", "чернослив"]
+        },
+        {
+            id: 3,
+            name: "Самаркандский плов",
+            description: "Отдельно рис и зирвак, выкладывается слоями, рассыпчатый.",
+            ingredients: "Баранина, рис, нут, изюм, морковь, зира, барбарис",
+            tags: ["самараканд", "рассыпчатый", "праздничный", "нут", "азиатский", "азия"]
+        },
+    ];
+
+    // отрисовка карточек первые 3 популярных
+    function renderMainRecipes() {
+        const grid = document.getElementById('recipeGrid');
+        if (!grid) return;
+        const mainRecipes = recipes.slice(0, 3);
+        grid.innerHTML = '';
+        mainRecipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            const imgStyle = getCardImageStyle(recipe.id);
+            card.innerHTML = `
+                <div class="card-img" style="${imgStyle}"></div>
+                <div class="card-content">
+                    <h3>${escapeHtml(recipe.name)}</h3>
+                    <p>${escapeHtml(recipe.description)}</p>
+                    <span class="badge">🍲 ${recipe.tags[0] || "вкусно"}</span>
+                </div>
+            `;
+            card.addEventListener('click', () => {
+                showRecipeDetailsModal(recipe);
+            });
+            grid.appendChild(card);
+        });
+    }
+
+    function getCardImageStyle(id) {
+        const colors = ["#f7cf9f", "#f5bc7a", "#eb9f5e", "#e7a15e", "#e89146", "#dc8a41"];
+        const color = colors[id % colors.length];
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    // детали рецепта при клике на карточку
+    function showRecipeDetailsModal(recipe) {
+        const modal = document.getElementById('searchResultsModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalRecipesList');
+        modalTitle.innerText = `🍛 ${recipe.name}`;
+        modalList.innerHTML = `
+            <div style="background:#f7e6d6; border-radius: 28px; padding:1rem;">
+                <p><strong>📝 Описание:</strong> ${escapeHtml(recipe.description)}</p>
+                <p><strong>🥘 Ингредиенты:</strong> ${escapeHtml(recipe.ingredients)}</p>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    }
+
+    // открыть книга нигааа рецептов" 
+    function openBookOfRecipes() {
+        const modal = document.getElementById('searchResultsModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalRecipesList');
+        modalTitle.innerText = '📖 Книга рецептов плова (все рецепты)';
+        modalList.innerHTML = '';
+        recipes.forEach(recipe => {
+            const recipeDiv = document.createElement('div');
+            recipeDiv.className = 'recipe-result';
+            recipeDiv.innerHTML = `<p><strong>🍚 ${escapeHtml(recipe.name)}</strong><br>${escapeHtml(recipe.description.substring(0, 80))}...</p>`;
+            recipeDiv.addEventListener('click', () => {
+                closeModal('searchResultsModal');
+                showRecipeDetailsModal(recipe);
+            });
+            modalList.appendChild(recipeDiv);
+        });
+        if(recipes.length === 0) modalList.innerHTML = '<p>Рецепты скоро появятся</p>';
+        modal.style.display = 'flex';
+    }
+
+    // поиск рецептов
+    function performSearch() {
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        if (query === "") {
+            alert("Введите название или ингредиент для поиска (например, баранина, курица)");
+            return;
+        }
+        const filtered = recipes.filter(recipe => 
+            recipe.name.toLowerCase().includes(query) || 
+            recipe.ingredients.toLowerCase().includes(query) ||
+            recipe.tags.some(tag => tag.toLowerCase().includes(query)) ||
+            recipe.description.toLowerCase().includes(query)
+        );
+        const modal = document.getElementById('searchResultsModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalRecipesList');
+        modalTitle.innerText = `🔍 Результаты поиска: "${escapeHtml(query)}"`;
+        modalList.innerHTML = '';
+        if(filtered.length === 0) {
+            modalList.innerHTML = '<div style="padding:1rem; text-align:center;">😔 Рецептов не найдено. Попробуйте "плов с курицей" или "узбекский"</div>';
+        } else {
+            filtered.forEach(recipe => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'recipe-result';
+                resultDiv.innerHTML = `<p><strong>🍛 ${escapeHtml(recipe.name)}</strong><br>${escapeHtml(recipe.description.slice(0, 70))}</p>`;
+                resultDiv.addEventListener('click', () => {
+                    closeModal('searchResultsModal');
+                    showRecipeDetailsModal(recipe);
+                });
+                modalList.appendChild(resultDiv);
+            });
+        }
+        modal.style.display = 'flex';
+    }
+
+    // вход/рега модал
+    function openLoginModal() {
+        document.getElementById('loginModal').style.display = 'flex';
+    }
+    function openRegisterModal() {
+        document.getElementById('registerModal').style.display = 'flex';
+    }
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    // если кто то зайдет или зарегает
+    function demoLogin() {
+        const username = document.getElementById('loginUsername').value.trim();
+        if(username === "") {
+            alert("Введите имя пользователя");
+            return;
+        }
+        alert(`🍚 Добро пожаловать, ${username}! Вы вошли в мир настоящего плова.`);
+        closeModal('loginModal');
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPassword').value = '';
+    }
+    function demoRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        if(name === "" || email === "") {
+            alert("Заполните имя и email для регистрации");
+            return;
+        }
+        alert(`✅ Регистрация успешна! ${name}, теперь вы можете сохранять любимые рецепты.`);
+        closeModal('registerModal');
+        document.getElementById('regName').value = '';
+        document.getElementById('regEmail').value = '';
+        document.getElementById('regPass').value = '';
+    }
+
+    // события писле загрузки 
+    document.addEventListener('DOMContentLoaded', () => {
+        renderMainRecipes();
+
+        const bookBtn = document.getElementById('bookRecipesBtn');
+        if(bookBtn) bookBtn.addEventListener('click', openBookOfRecipes);
+
+        const searchBtn = document.getElementById('openSearchBtn');
+        if(searchBtn) searchBtn.addEventListener('click', performSearch);
+        
+        const searchInputField = document.getElementById('searchInput');
+        if(searchInputField) {
+            searchInputField.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') performSearch();
+            });
+        }
+
+        const loginBtn = document.getElementById('loginModalBtn');
+        if(loginBtn) loginBtn.addEventListener('click', openLoginModal);
+        const registerBtn = document.getElementById('registerModalBtn');
+        if(registerBtn) registerBtn.addEventListener('click', openRegisterModal);
+
+        const submitLogin = document.getElementById('submitLogin');
+        if(submitLogin) submitLogin.addEventListener('click', demoLogin);
+        const submitReg = document.getElementById('submitRegister');
+        if(submitReg) submitReg.addEventListener('click', demoRegister);
+
+        // закрытие модалок
+        window.onclick = function(event) {
+            const modals = ['loginModal', 'registerModal', 'searchResultsModal'];
+            modals.forEach(id => {
+                const modalEl = document.getElementById(id);
+                if (event.target === modalEl) {
+                    modalEl.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
